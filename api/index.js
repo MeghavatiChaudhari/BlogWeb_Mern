@@ -19,7 +19,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use('/uploads', express.static(__dirname + '/uploads'));
 
-mongoose.connect('mongodb+srv://blog:RD8paskYC8Ayj09u@cluster0.pflplid.mongodb.net/?retryWrites=true&w=majority');
+mongoose.set('strictQuery', true); 
+
+mongoose.connect('mongodb+srv://blog:wbh6Rwwrbzc2BodT@cluster0.l2ctgla.mongodb.net/?retryWrites=true&w=majority');
+
+
 
 app.post('/register', async (req,res) => {
   const {username,password} = req.body;
@@ -133,6 +137,9 @@ app.get('/post/:id', async (req, res) => {
   const postDoc = await Post.findById(id).populate('author', ['username']);
   res.json(postDoc);
 })
-
-app.listen(4000);
+const PORT = 4000;
+// app.listen(4000);
+app.listen( PORT, () =>
+         console.log(`\n\n\t\t\t\t SERVER IS RUNNING on Port: ${PORT}`)
+      );
 //
